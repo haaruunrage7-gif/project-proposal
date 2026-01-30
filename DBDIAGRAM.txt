@@ -1,0 +1,63 @@
+// ===============================
+// ROOMS TABLE
+// ===============================
+Table Rooms {
+  RoomId int [pk]
+  Room_Type string
+  Description string
+  Room_Price int
+  Is_Available bool
+  Room_Rating float
+  Room_Capacity int
+}
+
+// ===============================
+// BOOKINGS TABLE
+// ===============================
+Table Bookings {
+  BookingId int [pk]
+  BookingReference string
+  BookingSurname string
+  Start_Date datetime
+  End_Date datetime
+  Booking_Purpose string
+  Guest_Count int
+  Additional_Requests string
+  RoomId int
+}
+// Relationship: Rooms → Bookings
+Ref: Rooms.RoomId < Bookings.RoomId
+
+// ===============================
+// ASP.NET IDENTITY TABLES
+// ===============================
+Table AspNetUsers {
+  UserId int [pk]
+  Username varchar
+  Email varchar
+  Password varchar
+}
+
+Table AspNetUserLogin {
+  ProviderId int [pk]
+  LoginProvider text
+  ProviderDisplayName text
+  UserId int
+}
+
+Table AspNetRoles {
+  RoleId int [pk]
+  Role text
+}
+
+Table AspNetUserRoles {
+  UserId int
+  RoleId int
+}
+
+// ===============================
+// RELATIONSHIPS (IDENTITY)
+// ===============================
+Ref: AspNetUsers.UserId < AspNetUserLogin.UserId
+Ref: AspNetUsers.UserId < AspNetUserRoles.UserId
+Ref: AspNetRoles.RoleId < AspNetUserRoles.RoleId
